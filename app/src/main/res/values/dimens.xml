@@ -6,4 +6,5 @@
     <dimen name="list_item_margin_start">20dp</dimen>
     <dimen name="title_margin_start">10dp</dimen>
     <dimen name="list_item_margin_end">20dp</dimen>
+    <dimen name="article_details_padding">20dp</dimen>
 </resources>

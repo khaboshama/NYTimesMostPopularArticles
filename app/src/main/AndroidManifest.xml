@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.khaled.nytimesmostpopulararticles.ui.most_popular_articles.view.MostPopularArticlesActivity">
+        <activity android:name=".ui.article_details.ArticleDetailsActivity" />
+        <activity android:name=".ui.most_popular_articles.view.MostPopularArticlesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

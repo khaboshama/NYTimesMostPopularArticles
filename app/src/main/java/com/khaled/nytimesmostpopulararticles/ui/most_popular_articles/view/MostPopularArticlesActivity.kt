@@ -1,5 +1,6 @@
 package com.khaled.nytimesmostpopulararticles.ui.most_popular_articles.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -7,7 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.khaled.nytimesmostpopulararticles.R
+import com.khaled.nytimesmostpopulararticles.constant.Constants
 import com.khaled.nytimesmostpopulararticles.databinding.ActivityMostPopularArticlesBinding
+import com.khaled.nytimesmostpopulararticles.ui.article_details.ArticleDetailsActivity
 import com.khaled.nytimesmostpopulararticles.ui.most_popular_articles.adapter.ArticleListAdapter
 import com.khaled.nytimesmostpopulararticles.ui.most_popular_articles.view_model.MostPopularArticlesViewModel
 
@@ -35,7 +38,11 @@ class MostPopularArticlesActivity : AppCompatActivity() {
             hideProgressBar()
             Toast.makeText(this, it, Toast.LENGTH_LONG).show()
         }
-        viewModel.navigateToArticleScreenLiveData.observe(this) {}
+        viewModel.navigateToArticleScreenLiveData.observe(this) {
+            startActivity(Intent(this, ArticleDetailsActivity::class.java).apply {
+                putExtra(Constants.INTENT_ARTICLE_KEY, it)
+            })
+        }
     }
 
     private fun hideProgressBar() {
