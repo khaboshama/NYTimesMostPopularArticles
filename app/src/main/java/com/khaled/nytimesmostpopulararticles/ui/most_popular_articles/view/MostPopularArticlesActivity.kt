@@ -3,7 +3,6 @@ package com.khaled.nytimesmostpopulararticles.ui.most_popular_articles.view
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.khaled.nytimesmostpopulararticles.R
@@ -14,7 +13,7 @@ import com.khaled.nytimesmostpopulararticles.ui.article_details.view.ArticleDeta
 import com.khaled.nytimesmostpopulararticles.ui.most_popular_articles.adapter.ArticleListAdapter
 import com.khaled.nytimesmostpopulararticles.ui.most_popular_articles.view_model.MostPopularArticlesViewModel
 
-class MostPopularArticlesActivity :
+open class MostPopularArticlesActivity :
     BaseActivity<ActivityMostPopularArticlesBinding, MostPopularArticlesViewModel>() {
 
     private lateinit var articleListAdapter: ArticleListAdapter
@@ -33,10 +32,6 @@ class MostPopularArticlesActivity :
             hideProgressBar()
             articleListAdapter.submitList(it)
         }
-        viewModel.showMessage.observe(this) {
-            hideProgressBar()
-            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
-        }
         viewModel.navigateToArticleScreenLiveData.observe(this) {
             startActivity(Intent(this, ArticleDetailsActivity::class.java).apply {
                 putExtra(Constants.INTENT_ARTICLE_KEY, it)
@@ -44,7 +39,7 @@ class MostPopularArticlesActivity :
         }
     }
 
-    private fun hideProgressBar() {
+    override fun hideProgressBar() {
         binding.loadingProgressBar.visibility = View.GONE
     }
 
