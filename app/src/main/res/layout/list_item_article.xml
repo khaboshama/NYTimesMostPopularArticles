@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/list_item_article_background">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/thumbnail_image_view"
+            android:layout_width="@dimen/thumbnail_width"
+            android:layout_height="@dimen/thumbnail_height"
+            android:layout_marginStart="@dimen/list_item_margin_start"
+            android:layout_marginTop="@dimen/list_item_margin_top"
+            app:civ_border_color="@android:color/black"
+            app:civ_border_width="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/arrow_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/list_item_margin_end"
+            android:src="@drawable/ic_arrow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/title_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/title_margin_start"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="@dimen/title_margin_start"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="title\nsasdasd asdasdasdasddf"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@id/arrow_image_view"
+            app:layout_constraintStart_toEndOf="@id/thumbnail_image_view"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/author_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="@dimen/title_margin_start"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="By "
+            android:textColor="@color/gray"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@id/arrow_image_view"
+            app:layout_constraintStart_toStartOf="@id/title_text_view"
+            app:layout_constraintTop_toBottomOf="@id/title_text_view" />
+
+        <TextView
+            android:id="@+id/date_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:text="25-11-2020"
+            android:textColor="@color/gray"
+            app:drawableStartCompat="@drawable/ic_calendar"
+            app:layout_constraintStart_toStartOf="@id/title_text_view"
+            app:layout_constraintTop_toBottomOf="@id/author_text_view" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
