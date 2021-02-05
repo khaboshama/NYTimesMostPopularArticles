@@ -1,10 +1,10 @@
 package com.khaled.nytimesmostpopulararticles.ui.most_popular_articles.view_model
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.khaled.nytimesmostpopulararticles.R
+import com.khaled.nytimesmostpopulararticles.base.BaseViewModel
 import com.khaled.nytimesmostpopulararticles.constant.Constants
 import com.khaled.nytimesmostpopulararticles.model.Article
 import com.khaled.nytimesmostpopulararticles.model.network.RetrofitService
@@ -13,15 +13,12 @@ import com.khaled.nytimesmostpopulararticles.utils.SingleLiveEvent
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class MostPopularArticlesViewModel(application: Application) : AndroidViewModel(application) {
+class MostPopularArticlesViewModel(application: Application) : BaseViewModel(application) {
 
     var articleList = MutableLiveData<List<Article>>()
         private set
 
     var navigateToArticleScreenLiveData = SingleLiveEvent<Article>()
-        private set
-
-    var showMessage = MutableLiveData<String>()
         private set
 
     fun loadArticleList() {
@@ -43,11 +40,11 @@ class MostPopularArticlesViewModel(application: Application) : AndroidViewModel(
         }
     }
 
-    private suspend fun parseArticleListSuccessResponse(articleListResponse: Response<ArticleListResponse>) {
+    private fun parseArticleListSuccessResponse(articleListResponse: Response<ArticleListResponse>) {
         articleList.value = articleListResponse.body()?.articleList
     }
 
-    private suspend fun parseArticleListErrorResponse() {
+    private fun parseArticleListErrorResponse() {
         showMessage.value = getApplication<Application>().getString(R.string.error_message)
     }
 

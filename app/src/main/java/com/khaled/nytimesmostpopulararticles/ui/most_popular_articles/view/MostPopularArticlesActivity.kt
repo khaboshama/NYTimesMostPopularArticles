@@ -4,17 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.khaled.nytimesmostpopulararticles.R
+import com.khaled.nytimesmostpopulararticles.base.BaseActivity
 import com.khaled.nytimesmostpopulararticles.constant.Constants
 import com.khaled.nytimesmostpopulararticles.databinding.ActivityMostPopularArticlesBinding
-import com.khaled.nytimesmostpopulararticles.ui.article_details.ArticleDetailsActivity
+import com.khaled.nytimesmostpopulararticles.ui.article_details.view.ArticleDetailsActivity
 import com.khaled.nytimesmostpopulararticles.ui.most_popular_articles.adapter.ArticleListAdapter
 import com.khaled.nytimesmostpopulararticles.ui.most_popular_articles.view_model.MostPopularArticlesViewModel
 
-class MostPopularArticlesActivity : AppCompatActivity() {
+class MostPopularArticlesActivity :
+    BaseActivity<ActivityMostPopularArticlesBinding, MostPopularArticlesViewModel>() {
 
     private lateinit var articleListAdapter: ArticleListAdapter
     private lateinit var binding: ActivityMostPopularArticlesBinding
@@ -22,8 +23,6 @@ class MostPopularArticlesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_most_popular_articles)
-        viewModel = ViewModelProvider(this).get(MostPopularArticlesViewModel::class.java)
         setupArticlesRecyclerView()
         setupObservers()
         viewModel.loadArticleList()
@@ -53,4 +52,13 @@ class MostPopularArticlesActivity : AppCompatActivity() {
         articleListAdapter = ArticleListAdapter(this)
         binding.articlesRecyclerView.adapter = articleListAdapter
     }
+
+    override fun getBaseViewModel() =
+        ViewModelProvider(this).get(MostPopularArticlesViewModel::class.java)
+            .also { viewModel = it }
+
+    override fun getActivityBinding() = (DataBindingUtil.setContentView(
+        this,
+        R.layout.activity_most_popular_articles
+    ) as ActivityMostPopularArticlesBinding).also { binding = it }
 }

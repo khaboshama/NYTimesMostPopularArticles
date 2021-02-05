@@ -1,23 +1,23 @@
-package com.khaled.nytimesmostpopulararticles.ui.article_details
+package com.khaled.nytimesmostpopulararticles.ui.article_details.view
 
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.khaled.nytimesmostpopulararticles.R
+import com.khaled.nytimesmostpopulararticles.base.BaseActivity
+import com.khaled.nytimesmostpopulararticles.base.BaseViewModel
 import com.khaled.nytimesmostpopulararticles.constant.Constants
 import com.khaled.nytimesmostpopulararticles.databinding.ActivityArticleDetailsBinding
 import com.khaled.nytimesmostpopulararticles.model.Article
+import com.khaled.nytimesmostpopulararticles.ui.article_details.view_model.ArticleDetailsViewModel
 
-class ArticleDetailsActivity : AppCompatActivity() {
+class ArticleDetailsActivity : BaseActivity<ActivityArticleDetailsBinding, BaseViewModel>() {
     private lateinit var binding: ActivityArticleDetailsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_article_details)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_article_details)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         parseExtraIntentData()
         binding.backArrowImageView.setOnClickListener { finish() }
     }
@@ -43,4 +43,12 @@ class ArticleDetailsActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+    override fun getBaseViewModel() =
+        ViewModelProvider(this).get(ArticleDetailsViewModel::class.java)
+
+    override fun getActivityBinding() = (DataBindingUtil.setContentView(
+        this,
+        R.layout.activity_article_details
+    ) as ActivityArticleDetailsBinding).also { binding = it }
 }
