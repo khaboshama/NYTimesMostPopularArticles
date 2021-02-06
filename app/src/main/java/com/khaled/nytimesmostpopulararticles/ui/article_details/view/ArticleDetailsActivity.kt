@@ -10,7 +10,7 @@ import com.khaled.nytimesmostpopulararticles.base.BaseActivity
 import com.khaled.nytimesmostpopulararticles.base.BaseViewModel
 import com.khaled.nytimesmostpopulararticles.constant.Constants
 import com.khaled.nytimesmostpopulararticles.databinding.ActivityArticleDetailsBinding
-import com.khaled.nytimesmostpopulararticles.model.Article
+import com.khaled.nytimesmostpopulararticles.model.ArticleItem
 import com.khaled.nytimesmostpopulararticles.ui.article_details.view_model.ArticleDetailsViewModel
 
 class ArticleDetailsActivity : BaseActivity<ActivityArticleDetailsBinding, BaseViewModel>() {
@@ -23,9 +23,9 @@ class ArticleDetailsActivity : BaseActivity<ActivityArticleDetailsBinding, BaseV
     }
 
     private fun parseExtraIntentData() {
-        val article = intent.getParcelableExtra<Article>(Constants.INTENT_ARTICLE_KEY)
+        val article = intent.getParcelableExtra<ArticleItem>(Constants.INTENT_ARTICLE_KEY)
         article?.let {
-            Glide.with(this).load(article.mediaList[0].mediaMetaDataList[2].url)
+            Glide.with(this).load(article.mediaUrl)
                 .placeholder(R.drawable.ic_place_holder).into(binding.originalImageView)
             binding.titleTextView.text = article.title
             binding.authorTextView.text = article.byline

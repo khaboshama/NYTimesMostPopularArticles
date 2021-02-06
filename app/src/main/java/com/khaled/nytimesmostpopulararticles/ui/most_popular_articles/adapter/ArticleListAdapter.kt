@@ -10,12 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.khaled.nytimesmostpopulararticles.R
 import com.khaled.nytimesmostpopulararticles.databinding.ListItemArticleBinding
-import com.khaled.nytimesmostpopulararticles.model.Article
+import com.khaled.nytimesmostpopulararticles.model.ArticleItem
 import com.khaled.nytimesmostpopulararticles.ui.most_popular_articles.view_model.MostPopularArticlesViewModel
 import com.khaled.nytimesmostpopulararticles.utils.convertDpToPixels
 
 class ArticleListAdapter(context: Context) :
-    ListAdapter<Article, ArticleListAdapter.ArticleViewHolder>(ArticleDiffCallback()) {
+    ListAdapter<ArticleItem, ArticleListAdapter.ArticleViewHolder>(ArticleItemDiffCallback()) {
 
     private var viewModel =
         ViewModelProvider((context as AppCompatActivity)).get(MostPopularArticlesViewModel::class.java)
@@ -38,7 +38,7 @@ class ArticleListAdapter(context: Context) :
             context.resources.getDimension(R.dimen.thumbnail_width)
         ).toInt()
         Glide.with(holder.thumbnailImageView.context)
-            .load(article.mediaList[0].mediaMetaDataList[0].url)
+            .load(article.mediaUrl)
             .override(width, height).placeholder(R.drawable.ic_place_holder)
             .into(holder.thumbnailImageView)
         holder.titleTextView.text = article.title

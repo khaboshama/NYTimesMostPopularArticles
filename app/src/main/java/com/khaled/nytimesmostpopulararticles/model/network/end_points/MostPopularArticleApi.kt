@@ -12,5 +12,5 @@ interface MostPopularArticleApi {
     suspend fun getMostPopularArticles(
         @Path("period") period: Int,
         @Query("api-key") apiKey: String
-    ): Response<ArticleListResponse>
+    ): ArticleListResponse
 }
